@@ -82,8 +82,8 @@ var ThreeD = function(){
         }
 
         var material = new THREE.MeshBasicMaterial({vertexColors: THREE.FaceColors})
-        var object = new THREE.Mesh(geom, material);
-        _this.scene.add(object);
+        _this.object = new THREE.Mesh(geom, material);
+        _this.scene.add(_this.object);
         _this.renderer.render(_this.scene, _this.camera);
 
 
@@ -107,7 +107,7 @@ var ThreeD = function(){
             _this.projector = null;
             _this.camera = null;
             _this.controls = null;
-            //empty(modelContainer);    
+            _this.empty(_this.object);    
         }
         
     };
