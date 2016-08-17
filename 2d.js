@@ -1,6 +1,8 @@
 var plot2D = function(obj){
+    var width = document.body.scrollWidth;
+    var height = document.body.scrollHeight;
     var svg = d3.select('#root').append('svg')
-        .attr('width', document.body.scrollWidth).attr('height', document.body.scrollHeight);
+        .attr('width', height).attr('height', height);
 
     var g = svg.append('g');
 
@@ -23,15 +25,11 @@ var plot2D = function(obj){
 
     var line = d3.svg.line()
             .x(function(d) {
-                if(d.x === Infinity || d.y === Infinity) 
-                    return 0;
 
-                return 20*parseFloat(d.x)+300; 
+                return 20*parseFloat(d.x)+height/2; 
             })
             .y(function(d) { 
-                if(d.x === Infinity || d.y === Infinity) 
-                    return 0;
-                return 20*parseFloat(d.y)+300; 
+                return 20*parseFloat(d.y)+height/2; 
             })
 
     if(path)

@@ -11,69 +11,93 @@ gui.add(init, 'type', ['2D', '3D'])
         init.type = val;
         plot(init);
     });
-gui.addFolder('Parameters - (both 2D & 3D)')
-gui.add(init, 'm', -10, 1000)
+
+var f2d = gui.addFolder('Parameters - (both 2D & 3D)')
+f2d.add(init, 'm', -10, 10).listen()
     .onFinishChange(function(val){
         init.m = val;
         plot(init);
     });
-gui.add(init, 'n1', -10, 1000)
+f2d.add(init, 'n1', -10, 10).listen()
     .onFinishChange(function(val){
         init.n1 = val;
         plot(init);
     });
-gui.add(init, 'n2', -10, 1000)
+f2d.add(init, 'n2', -10, 10).listen()
     .onFinishChange(function(val){
         init.n2 = val;
         plot(init);
     });
-gui.add(init, 'n3', -10, 1000)
+f2d.add(init, 'n3', -10, 10).listen()
     .onFinishChange(function(val){
         init.n3 = val;
         plot(init);
     });
-gui.add(init, 'a', -10, 1000)
+f2d.add(init, 'a', -10, 10).listen()
     .onFinishChange(function(val){
         init.a = val;
         plot(init);
     });
-gui.add(init, 'b', -10, 1000)
+f2d.add(init, 'b', -10, 10).listen()
     .onFinishChange(function(val){
         init.b = val;
         plot(init);
     });
 
-gui.addFolder('Additional parameters for 3D')
-gui.add(init, 'M', -10, 1000)
+var f3d = gui.addFolder('Additional parameters for 3D')
+f3d.add(init, 'M', -10, 10).listen()
     .onFinishChange(function(val){
         init.M = val;
         plot(init);
     });
-gui.add(init, 'N1', -10, 1000)
+f3d.add(init, 'N1', -10, 10).listen()
     .onFinishChange(function(val){
         init.N1 = val;
         plot(init);
     });
-gui.add(init, 'N2', -10, 1000)
+f3d.add(init, 'N2', -10, 10).listen()
     .onFinishChange(function(val){
         init.N2 = val;
         plot(init);
     });
-gui.add(init, 'N3', -10, 1000)
+f3d.add(init, 'N3', -10, 10).listen()
     .onFinishChange(function(val){
         init.N3 = val;
         plot(init);
     });
-gui.add(init, 'A', -10, 1000)
+f3d.add(init, 'A', -10, 10).listen()
     .onFinishChange(function(val){
         init.A = val;
         plot(init);
     });
-gui.add(init, 'B', -10, 1000)
-    .onFinishChange(function(val){
-        init.B = val;
-        plot(init);
+f3d.add(init, 'B', -10, 10).listen();
+
+f2d.open();
+f3d.open();
+
+var random = function(){
+    init.m = 10*Math.random();
+    init.n1 = 10*Math.random();
+    init.n2 = 10*Math.random();
+    init.n3 = 10*Math.random();
+    init.a = 10*Math.random();
+    init.b = 10*Math.random();
+    init.M = 10*Math.random();
+    init.N1 = 10*Math.random();
+    init.N2 = 10*Math.random();
+    init.N3 = 10*Math.random();
+    init.A = 10*Math.random();
+    init.B = 10*Math.random();
+        
+  
+    plot(init);
+};
+
+
+gui.add(window, 'random').onFinishChange(function(){
+       plot(init);
     });
+
 
 var plot = function(init){
     root.innerHTML = '';
