@@ -36,6 +36,13 @@ var TwoD = function(){
             var r =  1/denom;
             var x = r*Math.cos(theta);
             var y = r*Math.sin(theta);
+
+            if(isNaN(x) || !isFinite(x) || Math.abs(x) < 0.000001)
+                x = 0; 
+            if(isNaN(y) || !isFinite(y) || Math.abs(y) < 0.000001)
+                y = 0;
+
+
             data.push({x: x, y: y});
 
             //calculate min, max values
@@ -46,7 +53,7 @@ var TwoD = function(){
         }
         
         //make scales so overall size of the plot is around the same time
-        var xScale = d3.scale.linear().range([500, 750]).domain([xMin, xMax]);
+        var xScale = d3.scale.linear().range([550, 800]).domain([xMin, xMax]);
         var yScale = d3.scale.linear().range([250, 500]).domain([yMax, yMin]);
 
         //create the line
@@ -66,7 +73,8 @@ var TwoD = function(){
         else{
             //else create new svg and draw a new line
             _this.plot2D(state);
-            _this.path = _this.g.append('path').attr('d', line(data));
+            _this.path = _this.g.append('path').attr('d', line(data))
+                .style('fill', '#77b9cf').style('stroke', 'grey');
         }
         
     };
