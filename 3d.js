@@ -146,12 +146,15 @@ var ThreeD = function(){
         if(!_this.geometry)
             _this.geometry = new THREE.Geometry();
         
+        var colorScale = d3.scale.linear().domain([0, 1]).range(['#77b9cf',
+                '#2f4a52'])
         //create the geometry based on the spline points
         //and color it
         for(var i = 0; i < splinePoints.length; i++){
             _this.geometry.vertices[i] = splinePoints[i];  
-            _this.geometry.colors[ i ] = new THREE.Color(0.46, 
-                    0.72, 0.8);
+            _this.geometry.colors[ i ] = new THREE.Color(colorScale(Math.random()));
+                //new THREE.Color(0.46, 
+                    //0.72, 0.8);
             _this.geometry.colors[ i + 1 ] = _this.geometry.colors[ i ];
         }
         
