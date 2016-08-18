@@ -1,41 +1,74 @@
-var plot2D = function(obj){
-    var width = document.body.scrollWidth;
-    var height = document.body.scrollHeight;
-    var svg = d3.select('#root').append('svg')
-        .attr('width', height).attr('height', height);
+//Function toe build 2D superformula SVG graphic
 
-    var g = svg.append('g');
-
-    var path;
-
-    //formula constants
-    //var m = 10, n1 = 100, n2 = 100, n3 = 100, a = 7, b = 2;
-    var m = obj.m, n1 = obj.n1, n2 = obj.n2, n3 = obj.n3, a = obj.a, b = obj.b;
-
-    var data = [];
-    for(var i=0; i<360; i++){
-        var theta = i*Math.PI/180;
-        var term1 = Math.pow(Math.abs((1/a)*Math.cos(theta*m/4)), n2);
-        var term2 = Math.pow(Math.abs((1/b)*Math.sin(theta*m/4)), n3);
-        var denom = Math.pow(term1 + term2, 1/n1);
-        var r =  1/denom;
-        data.push({x: r*Math.cos(theta), y:r*Math.sin(theta)});
-    }
+var TwoD = function(){
+    var _this = this;
 
 
-    var line = d3.svg.line()
-            .x(function(d) {
+    //plot2D clears the entire document and initializes an svg
+    this.plot2D = function(state){
+        document.getElementById('root').innerHTML = '';
+        var width = 800;
+        var height = 800;
+        var svg = d3.select('#root').append('svg')
+            .attr('width', height).attr('height', height);
 
-                return 20*parseFloat(d.x)+height/2; 
-            })
-            .y(function(d) { 
-                return 20*parseFloat(d.y)+height/2; 
-            })
+        this.g = svg.append('g');
+    };
+   
+    //calculate data points from superformula
+    this.update = function(state){
 
-    if(path)
-        path.remove();
+        var m1 = state.m1, m2 = state.m2, n1 = state.n1, n2 = state.n2, 
+            n3 = state.n3, a = state.a, b = state.b;
 
-    path = g.append("path").attr("d", line(data));
+        var data = [], xMin = Infinity, xMax = -Infinity, 
+            yMin = Infinity, yMax = -Infinity;
 
+        //loop through (-180 degrees to 180degrees) one point for each degree
+        for(var i=-180; i<=180; i++){
+            var theta = i*Math.PI/180;
+            
+            //Code for the superformula
+            //https://en.wikipedia.org/wiki/Superformula
+            var term1 = Math.pow(Math.abs((1/a)*Math.cos(theta*m1/4)), n2);
+            var term2 = Math.pow(Math.abs((1/b)*Math.sin(theta*m2/4)), n3);
+            var denom = Math.pow(term1 + term2, -1/n1);
+            var r =  1/denom;
+            var x = r*Math.cos(theta);
+            var y = r*Math.sin(theta);
+            data.push({x: x, y: y});
+
+            //calculate min, max values
+            xMin = xMin > x ? x : xMin;
+            xMax = xMax < x ? x : xMax;
+            yMin = yMin > y ? y : yMin;
+            yMax = yMax < y ? y : yMax;
+        }
+        
+        //make scales so overall size of the plot is around the same time
+        var xScale = d3.scale.linear().range([500, 750]).domain([xMin, xMax]);
+        var yScale = d3.scale.linear().range([250, 500]).domain([yMax, yMin]);
+
+        //create the line
+        var line = d3.svg.line()
+                .x(function(d) {
+                    return xScale(parseFloat(d.x)); 
+                })
+                .y(function(d) { 
+                    return yScale(parseFloat(d.y));
+                });
+        
+        //transition nicely to new values if there is already a svg and line
+        if(document.querySelector('svg')){
+           _this.path.transition().duration(500)
+               .attr('d', line(data)); 
+        }
+        else{
+            //else create new svg and draw a new line
+            _this.plot2D(state);
+            _this.path = _this.g.append('path').attr('d', line(data));
+        }
+        
+    };
 };
 
