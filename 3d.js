@@ -150,7 +150,8 @@ var ThreeD = function(){
         //and color it
         for(var i = 0; i < splinePoints.length; i++){
             _this.geometry.vertices[i] = splinePoints[i];  
-            _this.geometry.colors[ i ] = new THREE.Color(0.3, 0.3, 0.3);
+            _this.geometry.colors[ i ] = new THREE.Color(0.46, 
+                    0.72, 0.8);
             _this.geometry.colors[ i + 1 ] = _this.geometry.colors[ i ];
         }
         

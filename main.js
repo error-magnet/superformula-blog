@@ -24,37 +24,37 @@ gui.add(state, 'type', ['2D', '3D'])
 
 //2D control panel
 var f2d = gui.addFolder('Parameters - (both 2D & 3D)')
-f2d.add(state, 'm1', -10, 1000)
+f2d.add(state, 'm1', -1000, 1000)
     .onFinishChange(function(val){
         state.m1 = val;
         plot(state);
     });
-f2d.add(state, 'm2', -10, 1000)
+f2d.add(state, 'm2', -1000, 1000)
     .onFinishChange(function(val){
         state.m2 = val;
         plot(state);
     });
-f2d.add(state, 'n1', -10, 1000)
+f2d.add(state, 'n1', -100, 100)
     .onFinishChange(function(val){
         state.n1 = val;
         plot(state);
     });
-f2d.add(state, 'n2', -10, 1000)
+f2d.add(state, 'n2', -100, 100)
     .onFinishChange(function(val){
         state.n2 = val;
         plot(state);
     });
-f2d.add(state, 'n3', -10, 1000)
+f2d.add(state, 'n3', -100, 100)
     .onFinishChange(function(val){
         state.n3 = val;
         plot(state);
     });
-f2d.add(state, 'a', -10, 1000)
+f2d.add(state, 'a', -100, 100)
     .onFinishChange(function(val){
         state.a = val;
         plot(state);
     });
-f2d.add(state, 'b', -10, 1000)
+f2d.add(state, 'b', -100, 100)
     .onFinishChange(function(val){
         state.b = val;
         plot(state);
@@ -62,55 +62,57 @@ f2d.add(state, 'b', -10, 1000)
 
 //3D control panel
 var f3d = gui.addFolder('Additional parameters for 3D')
-f3d.add(state, 'M1', -10, 1000)
+f3d.add(state, 'M1', -1000, 1000)
     .onFinishChange(function(val){
         state.M1 = val;
         plot(state);
     });
-f3d.add(state, 'M2', -10, 1000)
+f3d.add(state, 'M2', -1000, 1000)
     .onFinishChange(function(val){
         state.M2 = val;
         plot(state);
     });
-f3d.add(state, 'N1', -10, 1000)
+f3d.add(state, 'N1', -100, 100)
     .onFinishChange(function(val){
         state.N1 = val;
         plot(state);
     });
-f3d.add(state, 'N2', -10, 1000)
+f3d.add(state, 'N2', -100, 100)
     .onFinishChange(function(val){
         state.N2 = val;
         plot(state);
     });
-f3d.add(state, 'N3', -10, 1000)
+f3d.add(state, 'N3', -100, 100)
     .onFinishChange(function(val){
         state.N3 = val;
         plot(state);
     });
-f3d.add(state, 'A', -10, 1000)
+f3d.add(state, 'A', -100, 100)
     .onFinishChange(function(val){
         state.A = val;
         plot(state);
     });
-f3d.add(state, 'B', -10, 1000)
+f3d.add(state, 'B', -100, 100)
 
 f2d.open();
 f3d.open();
 
 //select random values
 var random = function(){
-    state.m = 200*Math.random();
-    state.n1 = 200*Math.random();
-    state.n2 = 200*Math.random();
-    state.n3 = 200*Math.random();
-    state.a = 200*Math.random();
-    state.b = 200*Math.random();
-    state.M = 200*Math.random();
-    state.N1 = 200*Math.random();
-    state.N2 = 200*Math.random();
-    state.N3 = 200*Math.random();
-    state.A = 200*Math.random();
-    state.B = 200*Math.random();
+    state.m1 = 1000*Math.random();
+    state.m1 = 1000*Math.random();
+    state.n1 = 100*Math.random();
+    state.n2 = 100*Math.random();
+    state.n3 = 100*Math.random();
+    state.a = 100*Math.random();
+    state.b = 100*Math.random();
+    state.M1 = 1000*Math.random();
+    state.M2 = 1000*Math.random();
+    state.N1 = 100*Math.random();
+    state.N2 = 100*Math.random();
+    state.N3 = 100*Math.random();
+    state.A = 100*Math.random();
+    state.B = 100*Math.random();
     
     //update dat gui to reflect the randomize changes
     //.listen() could be used, but it is bugged
