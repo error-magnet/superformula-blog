@@ -37,11 +37,10 @@ var TwoD = function(){
             var x = r*Math.cos(theta);
             var y = r*Math.sin(theta);
 
-            if(isNaN(x) || !isFinite(x) || Math.abs(x) < 0.000001)
+            if(isNaN(x) || !isFinite(x))
                 x = 0; 
-            if(isNaN(y) || !isFinite(y) || Math.abs(y) < 0.000001)
+            if(isNaN(y) || !isFinite(y))
                 y = 0;
-
 
             data.push({x: x, y: y});
 
