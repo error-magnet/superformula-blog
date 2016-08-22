@@ -1,6 +1,6 @@
 #Superformula Explorer
 
-This is an implementation of Superformula by Johan Gieles.
+This is a visual implementation of the [Superformula](https://en.wikipedia.org/wiki/Superformula).
 
 To run, just clone/download the repo and run index.html in Chrome/Firefox.
 
