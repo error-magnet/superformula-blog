@@ -18,5 +18,6 @@ Libraries used:
 - [dat.gui](https://github.com/dataarts/dat.gui)
 
 Superformula by [Johan Gieles](http://www.amjbot.org/content/90/3/333.full)
+
 3D extension of the Superformula taken from [Paul Bourke](http://paulbourke.net/geometry/supershape/).
 
