@@ -2,15 +2,14 @@
 
 var TwoD = function(){
     var _this = this;
-
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
 
     //plot2D clears the entire document and initializes an svg
     this.plot2D = function(state){
         document.getElementById('root').innerHTML = '';
-        var width = 800;
-        var height = 800;
         var svg = d3.select('#root').append('svg')
-            .attr('width', height).attr('height', height);
+            .attr('width', this.width).attr('height', this.height);
 
         this.g = svg.append('g');
     };
@@ -50,10 +49,9 @@ var TwoD = function(){
             yMin = yMin > y ? y : yMin;
             yMax = yMax < y ? y : yMax;
         }
-        
         //make scales so overall size of the plot is around the same time
-        var xScale = d3.scale.linear().range([550, 800]).domain([xMin, xMax]);
-        var yScale = d3.scale.linear().range([250, 500]).domain([yMax, yMin]);
+        var xScale = d3.scale.linear().range([this.width*0.35, this.width*0.35+250]).domain([xMin, xMax]);
+        var yScale = d3.scale.linear().range([this.height*0.3, this.height*0.3+250]).domain([yMax, yMin]);
 
         //create the line
         var line = d3.svg.line()
