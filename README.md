@@ -1,4 +1,4 @@
-#Superformula Explorer
+# Superformula Explorer
 
 The code is hosted [here](https://ather-energy.github.io/superformula-blog/).
 
